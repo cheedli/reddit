@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../dist/types/engine",
+    "tsBuildInfoFile": "../dist/types/engine/tsconfig.tsbuildinfo",
+    "rootDir": "../src/engine"
+  },
+  "include": ["../src/engine/**/*"],
+  "exclude": []
+}

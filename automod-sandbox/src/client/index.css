@@ -1,0 +1,200 @@
+@import 'tailwindcss';
+
+/* -- Base reset ----------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+/* -- Semantic theme tokens (defaults = Reddit native) --------------------- */
+:root {
+  --bg:            #dae0e6;
+  --bg-2:          #ffffff;
+  --bg-3:          #f6f7f8;
+  --border:        #edeff1;
+  --border-strong: #ccc;
+  --border-focus:  #0079d3;
+  --text:          #1c1c1c;
+  --text-2:        #545452;
+  --text-3:        #878a8c;
+  --accent:        #ff4500;
+  --accent-hover:  #e03d00;
+  --accent-2:      #0079d3;
+  --accent-2-hover:#006cbf;
+  --accent-glow:   none;
+  --action-remove: #ea0027;
+  --action-filter: #ffb000;
+  --action-report: #0079d3;
+  --action-approve:#46d160;
+  --tab-active:    #ff4500;
+  --btn-primary:   #ff4500;
+  --btn-danger:    #ea0027;
+  --radius:        4px;
+  --font-ui:       -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-body:     -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+/* -- Utility: t- prefixed semantic classes -------------------------------- */
+.t-root        { display: flex; flex-direction: column; height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-body); overflow: hidden; }
+.t-header      { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.875rem; border-bottom: 1px solid var(--border-strong); flex-shrink: 0; background: var(--bg-2); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+.t-logo        { font-family: var(--font-ui); font-weight: 700; font-size: 0.875rem; color: var(--text); letter-spacing: 0; }
+.t-logo svg    { color: var(--accent); }
+.t-tab-bar     { display: flex; gap: 0.25rem; border-bottom: 1px solid var(--border); padding: 0.5rem 0.75rem 0; flex-shrink: 0; background: var(--bg-2); }
+.t-tab         { padding: 0.5rem 0.75rem; font-size: 0.75rem; font-weight: 700; border-bottom: 3px solid transparent; color: var(--text-3); cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; font-family: var(--font-ui); transition: color 0.15s, border-color 0.15s, background-color 0.15s; border-radius: var(--radius) var(--radius) 0 0; }
+.t-tab:hover   { color: var(--text); background: var(--bg-3); }
+.t-tab.active  { border-bottom-color: var(--tab-active); color: var(--text); background: #fff; }
+.t-pane        { background: var(--bg-2); border-color: var(--border); }
+.t-pane-header { padding: 0.625rem 0.75rem; border-bottom: 1px solid var(--border); font-size: 0.75rem; font-weight: 700; color: var(--text-2); flex-shrink: 0; background: var(--bg-3); font-family: var(--font-ui); }
+.t-card        { background: var(--bg-2); border: 1px solid var(--border-strong); border-radius: var(--radius); box-shadow: none; }
+.t-text        { color: var(--text); }
+.t-text-2      { color: var(--text-2); }
+.t-text-3      { color: var(--text-3); }
+.t-text-accent { color: var(--accent); }
+.t-border      { border-color: var(--border); }
+.t-divider     { border-top: 1px solid var(--border); }
+
+/* Buttons */
+.t-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 32px;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--text-3);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--accent-2);
+  font-size: 0.75rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+.t-btn:hover:not(:disabled) { border-color: var(--accent-2); background: var(--bg-3); color: var(--accent-2-hover); }
+.t-btn:disabled { opacity: 0.4; cursor: default; }
+
+.t-btn-primary {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 32px;
+  padding: 0.375rem 0.875rem;
+  background: var(--btn-primary);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s, opacity 0.15s;
+  box-shadow: var(--accent-glow);
+}
+.t-btn-primary:hover:not(:disabled) { background: var(--accent-hover); opacity: 1; }
+.t-btn-primary:disabled { opacity: 0.4; cursor: default; }
+
+.t-btn-danger {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 32px;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--btn-danger);
+  background: transparent;
+  color: var(--btn-danger);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: background-color 0.15s, opacity 0.15s;
+}
+.t-btn-danger:hover:not(:disabled) { opacity: 1; background: color-mix(in srgb, var(--btn-danger) 6%, transparent); }
+.t-btn-danger:disabled { opacity: 0.3; cursor: default; }
+
+/* Inputs */
+.t-input {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.t-input:focus { border-color: var(--border-focus); box-shadow: 0 0 0 1px var(--border-focus); }
+
+.t-textarea {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  padding: 0.75rem;
+  width: 100%;
+  outline: none;
+  resize: none;
+  transition: border-color 0.15s;
+}
+.t-textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 0 1px var(--border-focus); }
+
+/* Select / dropdown */
+.t-select {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  outline: none;
+}
+.t-select:focus { border-color: var(--border-focus); box-shadow: 0 0 0 1px var(--border-focus); }
+
+/* Badges */
+.t-badge         { display: inline-flex; align-items: center; padding: 0.125rem 0.5rem; border-radius: 999px; font-size: 0.6875rem; font-weight: 700; border: 1px solid; font-family: var(--font-ui); }
+.t-badge-remove  { color: var(--action-remove); border-color: color-mix(in srgb, var(--action-remove) 40%, transparent); background: color-mix(in srgb, var(--action-remove) 10%, transparent); }
+.t-badge-filter  { color: var(--action-filter); border-color: color-mix(in srgb, var(--action-filter) 40%, transparent); background: color-mix(in srgb, var(--action-filter) 10%, transparent); }
+.t-badge-report  { color: var(--action-report); border-color: color-mix(in srgb, var(--action-report) 40%, transparent); background: color-mix(in srgb, var(--action-report) 10%, transparent); }
+.t-badge-approve { color: var(--action-approve); border-color: color-mix(in srgb, var(--action-approve) 40%, transparent); background: color-mix(in srgb, var(--action-approve) 10%, transparent); }
+.t-badge-neutral { color: var(--text-2); border-color: var(--border); background: var(--bg-3); }
+.t-badge-success { color: var(--action-approve); border-color: color-mix(in srgb, var(--action-approve) 35%, transparent); background: color-mix(in srgb, var(--action-approve) 8%, transparent); }
+.t-badge-warn    { color: var(--action-filter); border-color: color-mix(in srgb, var(--action-filter) 35%, transparent); background: color-mix(in srgb, var(--action-filter) 8%, transparent); }
+.t-badge-err     { color: var(--action-remove); border-color: color-mix(in srgb, var(--action-remove) 35%, transparent); background: color-mix(in srgb, var(--action-remove) 8%, transparent); }
+.t-badge-info    { color: var(--action-report); border-color: color-mix(in srgb, var(--action-report) 35%, transparent); background: color-mix(in srgb, var(--action-report) 8%, transparent); }
+
+/* Alert banners */
+.t-alert-warn  { background: #fff7e0; border: 1px solid #ffd635; border-radius: var(--radius); padding: 0.625rem 0.75rem; color: #7c5600; font-size: 0.75rem; }
+.t-alert-err   { background: #fff2f4; border: 1px solid #ffccd2; border-radius: var(--radius); padding: 0.625rem 0.75rem; color: var(--action-remove); font-size: 0.75rem; }
+.t-alert-ok    { background: #f0fff4; border: 1px solid #a8f0b8; border-radius: var(--radius); padding: 0.625rem 0.75rem; color: #0a7a25; font-size: 0.75rem; }
+.t-alert-info  { background: #eef7ff; border: 1px solid #c9e7ff; border-radius: var(--radius); padding: 0.625rem 0.75rem; color: var(--action-report); font-size: 0.75rem; }
+
+button:focus-visible,
+.t-tab:focus-visible,
+.t-input:focus-visible,
+.t-textarea:focus-visible,
+.t-select:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+
+/* Progress bar */
+.t-progress-track { height: 4px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.t-progress-fill  { height: 100%; background: var(--accent); border-radius: 999px; transition: width 0.3s; box-shadow: var(--accent-glow); }
+
+/* Code / YAML blocks */
+.t-code { font-family: "SF Mono","Cascadia Code","Fira Code",Consolas,monospace; font-size: 0.75rem; background: var(--bg-3); border-radius: var(--radius); padding: 0.75rem; overflow-x: auto; white-space: pre-wrap; color: var(--text); border: 1px solid var(--border); }
+
+/* Pulse animation */
+@keyframes t-pulse { 0%,100% { opacity:1 } 50% { opacity:0.45 } }
+.t-pulse { animation: t-pulse 1.4s ease-in-out infinite; }

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "automod-sandbox",
+  "post": {
+    "dir": "dist/client",
+    "entrypoints": {
+      "default": {
+        "inline": true,
+        "entry": "splash.html"
+      },
+      "game": {
+        "entry": "game.html"
+      }
+    }
+  },
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
+  "settings": {
+    "subreddit": {
+      "llmProvider": {
+        "type": "string",
+        "label": "AI Provider (openai / anthropic / gemini)",
+        "helpText": "Which LLM to use for plain-English translation and suggestion candidates. Accepted values: openai, anthropic, gemini. Defaults to openai.",
+        "defaultValue": "openai"
+      },
+      "llmApiKey": {
+        "type": "string",
+        "label": "LLM API Key (optional)",
+        "helpText": "API key for the chosen provider. Without a key, local template mode and heuristic suggestions still work. OpenAI: sk-... | Anthropic: sk-ant-... | Gemini: AIza...",
+        "placeholder": "sk-..."
+      },
+      "historyDays": {
+        "type": "number",
+        "label": "Days of history to load (1–90)",
+        "helpText": "Note: Reddit API returns at most ~1000 posts regardless of this setting.",
+        "defaultValue": 30
+      }
+    }
+  },
+  "permissions": {
+    "redis": true,
+    "reddit": {
+      "enable": true,
+      "scope": "moderator"
+    },
+    "http": {
+      "enable": true,
+      "domains": ["api.openai.com", "api.anthropic.com", "generativelanguage.googleapis.com", "httpbin.org"]
+    }
+  },
+  "triggers": {
+    "onAppInstall": "/internal/triggers/on-app-install",
+    "onAppUpgrade": "/internal/triggers/on-app-upgrade",
+    "onModAction": "/internal/triggers/on-mod-action"
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Open AutoMod Studio",
+        "description": "Draft, replay, and safely apply AutoMod rules against recent subreddit history",
+        "location": "subreddit",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/open-studio"
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "dev": {
+    "subreddit": "automod_sandbox_dev"
+  }
+}
